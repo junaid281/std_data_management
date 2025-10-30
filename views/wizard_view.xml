@@ -1,0 +1,69 @@
+<odoo>
+    <!-- ===================================
+         Student Report Wizard
+    =================================== -->
+    <record id="view_student_report_wizard_form" model="ir.ui.view">
+        <field name="name">student.report.wizard.form</field>
+        <field name="model">student.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generate Report">
+                <group>
+                    <field name="report_type"/>
+
+                    <!-- Show only when report_type = 'single' -->
+                    <field name="student_id" invisible="report_type != 'single'"/>
+
+                    <!-- Show only when report_type = 'department' -->
+                    <field name="department_id" invisible="report_type != 'department'"/>
+                </group>
+
+                <footer>
+                    <button string="Generate"
+                            name="action_generate_report"
+                            type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel"
+                            class="btn-secondary"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_student_email_wizard_form" model="ir.ui.view">
+        <field name="name">student.email.wizard.form</field>
+        <field name="model">student.email.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Send Report by Email">
+                <group>
+                    <!-- Step 2.1: Selection field -->
+                    <field name="report_type"/>
+
+                    <!-- Step 2.2: Show Student field only when report_type = single -->
+                    <field name="student_id"
+                           modifiers='{"invisible": [["report_type", "!=", "single"]],
+                                       "required": [["report_type", "=", "single"]]}'/>
+
+                    <!-- Step 2.3: Show Department field only when report_type = department -->
+                    <field name="department_id"
+                           modifiers='{"invisible": [["report_type", "!=", "department"]],
+                                       "required": [["report_type", "=", "department"]]}'/>
+
+                    <!-- Step 2.4: Email and phone always visible -->
+                    <field name="email_to"/>
+                    <field name="phone"/>
+                </group>
+
+                <footer>
+                    <button name="action_send_email"
+                            string="Send Email"
+                            type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- ============================ -->
+        <!-- Department Master -->
+        <record id="view_department_list" model="ir.ui.view">
+            <field name="name">department.list</field>
+            <field name="model">department</field>
+            <field name="arch" type="xml">
+                <list string="Departments">
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_department_form" model="ir.ui.view">
+            <field name="name">department.form</field>
+            <field name="model">department</field>
+            <field name="arch" type="xml">
+                <form string="Department">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_department" model="ir.actions.act_window">
+            <field name="name">Departments</field>
+            <field name="res_model">department</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- ============================ -->
+        <!-- Institute -->
+        <record id="view_institute_list" model="ir.ui.view">
+            <field name="name">institute.list</field>
+            <field name="model">institute</field>
+            <field name="arch" type="xml">
+                <list string="Institutes">
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_institute_form" model="ir.ui.view">
+            <field name="name">institute.form</field>
+            <field name="model">institute</field>
+            <field name="arch" type="xml">
+                <form string="Institute">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_institute" model="ir.actions.act_window">
+            <field name="name">Institutes</field>
+            <field name="res_model">institute</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- ============================ -->
+        <!-- Student Report Wizard -->
+        <record id="action_student_report_wizard" model="ir.actions.act_window">
+            <field name="name">Student Report Wizard</field>
+            <field name="res_model">student.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- ============================ -->
+        <!-- Student Email Wizard -->
+        <record id="action_student_email_wizard" model="ir.actions.act_window">
+            <field name="name">Send Email</field>
+            <field name="res_model">student.email.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{'default_student_id': active_id}</field>
+        </record>
+
+        <!-- ============================ -->
+        <!-- Student Form View -->
+        <record id="view_student_form" model="ir.ui.view">
+            <field name="name">student.form</field>
+            <field name="model">student</field>
+            <field name="arch" type="xml">
+                <form string="Student">
+                    <header>
+                        <button name="action_save_record" type="object" string="Save" class="btn-primary"/>
+                        <button name="action_delete_record" type="object" string="Archive" confirm="Are you sure?" class="btn-secondary"/>
+                        <button name="action_restore_record" type="object" string="Restore" class="btn-primary"/>
+                        <button name="action_open_report_choice" string="Print Report" type="object" class="btn-primary"/> 
+                        <button name="%(action_student_email_wizard)d" string="Send Email" type="action" class="btn-primary"/>
+                    </header>
+
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="father_name"/>
+                                <field name="age"/>
+                                <field name="address"/>
+                                <field name="gender"/>
+                            </group>
+                            <group>
+                                <field name="total_marks"/>
+                                <field name="obtained_marks"/>
+                                <field name="grade"/>
+                                <field name="department_id"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Education Details">
+                                <field name="about_education" nolabel="1">
+                                    <list editable="bottom">
+                                        <field name="institute"/>
+                                        <field name="degree"/>
+                                        <field name="passing_year"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- ============================ -->
+        <!-- Student List View -->
+        <record id="view_student_list" model="ir.ui.view">
+            <field name="name">student.list</field>
+            <field name="model">student</field>
+            <field name="arch" type="xml">
+                <list string="Students">
+                    <field name="name"/>
+                    <field name="father_name"/>
+                    <field name="age"/>
+                    <field name="grade"/>
+                    <field name="gender"/>
+                    <field name="department_id"/>
+                    <button name="action_open_report_choice" string="Print Report" type="object" icon="fa-print" class="btn-primary"/> 
+                </list>
+            </field>
+        </record>
+
+        <!-- ============================ -->
+        <!-- Student Actions -->
+        <record id="action_student" model="ir.actions.act_window">
+            <field name="name">Students</field>
+            <field name="res_model">student</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('active', '=', True)]</field>
+        </record>
+
+        <!-- ============================ -->
+        <!-- Department Filters -->
+        <record id="action_math_students" model="ir.actions.act_window">
+            <field name="name">Math Students</field>
+            <field name="res_model">student</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('department_id.name', '=', 'MATH')]</field>
+        </record>
+
+        <record id="action_bscs_students" model="ir.actions.act_window">
+            <field name="name">BSCS Students</field>
+            <field name="res_model">student</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('department_id.name', '=', 'BSCS')]</field>
+        </record>
+
+        <record id="action_physics_students" model="ir.actions.act_window">
+            <field name="name">Physics Students</field>
+            <field name="res_model">student</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('department_id.name', '=', 'PHYSICS')]</field>
+        </record>
+
+        <record id="action_bba_students" model="ir.actions.act_window">
+            <field name="name">BBA Students</field>
+            <field name="res_model">student</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('department_id.name', '=', 'BBA')]</field>
+        </record>
+
+        <record id="action_commerce_students" model="ir.actions.act_window">
+            <field name="name">Commerce Students</field>
+            <field name="res_model">student</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('department_id.name', '=', 'COMMERCE')]</field>
+        </record>
+
+        <!-- ============================ -->
+        <!-- Menus -->
+        <menuitem id="menu_student_root" name="Student Management"/>
+        <menuitem id="menu_student" name="Students" parent="menu_student_root" action="action_student"/>
+        
+
+    </data>
+</odoo>

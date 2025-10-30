@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_student,access.student,model_student,base.group_user,1,1,1,1
+access_education,access.education,model_education,base.group_user,1,1,1,1
+access_institute,access.institute,model_institute,base.group_user,1,1,1,1
+access_degree,access.degree,model_degree,base.group_user,1,1,1,1
+access_department,access.department,model_department,base.group_user,1,1,1,1
+access_student_report_wizard,access.student.report.wizard,model_student_report_wizard,base.group_user,1,1,1,1
+access_student_email_wizard,access.student.email.wizard,model_student_email_wizard,base.group_user,1,1,1,1
