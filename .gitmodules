@@ -1,0 +1,4 @@
+[submodule "junaid281/std_data_management"]
+	path = junaid281/std_data_management
+	url = git@github.com:junaid281/std_data_management.git
+	branch = main
